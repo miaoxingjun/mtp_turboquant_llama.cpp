@@ -5,8 +5,8 @@
 ## 特性
 
 - **TurboQuant KV Cache 量化加速**
-  - `TURBO3` — 3-bit PolarQuant + WHT
-  - `TURBO4` — 4-bit PolarQuant + WHT
+  - `TURBO3` — 3-bit TurboQuant + WHT
+  - `TURBO4` — 4-bit TurboQuant + WHT
 - **MTP（Multi-Token Prediction）多 Token 预测**
   - 支持 Qwen3.5 / Qwen3.6 系列模型的 speculative decoding
   - 通过 `--spec-type draft-mtp` 启用
