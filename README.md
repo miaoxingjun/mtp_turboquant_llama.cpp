@@ -1,3 +1,8 @@
+<img width="1920" height="1080" alt="c2000ba7bc722d28438e7569d70b8875" src="https://github.com/user-attachments/assets/1f19bb13-9697-4f81-8c71-2d7d2a62e44f" />
+<img width="1920" height="1080" alt="de79ca7e4d70339f174a50309d5ba93e" src="https://github.com/user-attachments/assets/2e3cfb7a-bdb2-45e0-b957-7d0491891122" />
+<img width="1920" height="1080" alt="2911fa6c5c9a83d7b6fc23d1170943df" src="https://github.com/user-attachments/assets/f6d8c9bf-dbe4-4c77-882c-6d3bc0dc6577" />
+
+
 # llama.cpp Turbo+MTP 增强版
 
 基于 [llama.cpp](https://github.com/ggml-org/llama.cpp) 的合并版本，集成了 **TurboQuant** 加速支持和 **MTP（Multi-Token Prediction）** 功能。
