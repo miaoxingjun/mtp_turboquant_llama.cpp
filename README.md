@@ -5,11 +5,8 @@
 ## 特性
 
 - **TurboQuant KV Cache 量化加速**
-  - `TURBO2_0` — 2-bit PolarQuant + WHT
-  - `TURBO3_0` — 3-bit PolarQuant + WHT
-  - `TURBO4_0` — 4-bit PolarQuant + WHT
-  - `TQ3_1S` — 3-bit WHT-rotated Lloyd-Max 权重量化
-  - `TQ4_1S` — 4-bit WHT-rotated Lloyd-Max 权重量化
+  - `TURBO3` — 3-bit PolarQuant + WHT
+  - `TURBO4` — 4-bit PolarQuant + WHT
 - **MTP（Multi-Token Prediction）多 Token 预测**
   - 支持 Qwen3.5 / Qwen3.6 系列模型的 speculative decoding
   - 通过 `--spec-type draft-mtp` 启用
@@ -48,8 +45,8 @@ cmake --build build --config Release -j 8
 ```bash
 build\bin\Release\llama-server.exe ^
   -m model-Q4_K_M.gguf ^
-  --cache-type-k turbo3_0 ^
-  --cache-type-v turbo3_0 ^
+  --cache-type-k turbo4 ^
+  --cache-type-v turbo3 ^
   -c 8192
 ```
 
@@ -59,7 +56,7 @@ build\bin\Release\llama-server.exe ^
 build\bin\Release\llama-server.exe ^
   -m model-Q4_K_M.gguf ^
   --spec-type draft-mtp ^
-  -md mtp-head.gguf ^
+  --spec-draft-n-max 2
   -c 8192
 ```
 
@@ -68,18 +65,9 @@ build\bin\Release\llama-server.exe ^
 ```bash
 build\bin\Release\llama-cli.exe ^
   -m model-Q4_K_M.gguf ^
-  --cache-type-k turbo4_0 ^
-  --cache-type-v turbo4_0 ^
+  --cache-type-k turbo4 ^
+  --cache-type-v turbo4 ^
   -n 512 -p "你好，请介绍一下你自己"
-```
-
-### 量化模型时使用 TurboQuant
-
-```bash
-build\bin\Release\llama-quantize.exe ^
-  model-f16.gguf ^
-  model-tq4_1s.gguf ^
-  TQ4_1S
 ```
 
 ## 支持的模型
@@ -101,8 +89,7 @@ build\bin\Release\llama-quantize.exe ^
 
 ## 注意事项
 
-- TurboQuant 量化类型（`TURBO2_0/3_0/4_0`）主要用于 **KV Cache**，通过 `--cache-type-k` 和 `--cache-type-v` 参数设置
-- `TQ3_1S/TQ4_1S` 是权重量化类型，用于模型权重量化
+- TurboQuant 量化类型（`TURBO2/3/4`）主要用于 **KV Cache**，通过 `--cache-type-k` 和 `--cache-type-v` 参数设置
 - MTP 功能需要配套的 MTP head 模型文件，可通过 `-hf` 参数自动下载
 - CUDA 后端对 TurboQuant 有完整 kernel 支持，CPU 后端同样可用但性能较低
 - 使用 TURBO 量化可以显著减少 KV Cache 显存占用并提升 decode 吞吐量，但可能有轻微精度损失
